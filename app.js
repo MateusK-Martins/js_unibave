@@ -42,69 +42,132 @@ console.log(harry)
 
 // ---------------------------------------------------
 
-class interation{
-    constructor(div){
-        this.div = div
+class dyn{
+    constructor(element){
+        this.element = element
     }
-    move(){
-        let pressed = false
-        let div_clicked = false
-        
-        this.div.addEventListener("click",()=>{
-        
-            if (div_clicked == true){
-                div_clicked = false
-                this.div.style.backgroundColor = "blue"
+    follow(){
+        let click = false
+        this.element.addEventListener("click",()=>{
+            if (click == false){
+                click = true
+                this.element.style.zIndex = "10"
+                this.element.classList.add("active")
             }
             else{
-                div_clicked = true;
-                this.div.style.backgroundColor = "red"
+                click = false
+                this.element.style.zIndex = "3"
+                this.element.classList.remove("active")
             }
-        
         })
-        
-        window.addEventListener("mousedown",(e)=>{
-            pressed = true
-        })
-        window.addEventListener("mouseup",(e)=>{
-            pressed = false
-        
-        })
-        
         window.addEventListener("mousemove",(e)=>{
-            if (pressed == true && div_clicked == true){
-                this.div.style.top = `${e.pageY-this.div.clientHeight/2}px`;
-                this.div.style.left = `${e.pageX-this.div.clientHeight/2}px`;
+            if (click){
+                this.element.style.top = `${e.pageY-25}px`
+                this.element.style.left = `${e.pageX-25}px`
             }
-        })
-    }    
-    move_to(){
-        let div_clicked = false
-        
-        this.div.addEventListener("click",()=>{
-        
-            if (div_clicked == true){
-                div_clicked = false
-                this.div.style.backgroundColor = "blue"
+        });
+    }
+    follow_click(){
+        let click = false
+        this.element.addEventListener("click",()=>{
+            if (click == false){
+                click = true
+                this.element.style.zIndex = "10"
+                this.element.classList.add("active")
             }
             else{
-                div_clicked = true;
-                this.div.style.backgroundColor = "red"
+                click = false
+                this.element.style.zIndex = "3"
+                this.element.classList.remove("active")
             }
         })
-        
-        window.addEventListener("mousedown",(e)=>{
-            if (div_clicked == true)
-            {
-                this.div.style.top = `${e.pageY-this.div.clientHeight/2}px`;
-                this.div.style.left = `${e.pageX-this.div.clientHeight/2}px`;
+        window.addEventListener("click",(e)=>{
+            if (click){
+                this.element.style.top = `${e.pageY-25}px`
+                this.element.style.left = `${e.pageX-25}px`
             }
-        })
+        });
     }
 }
 
-let circle = new interation(document.getElementById("circle"))
-circle.move();
+// ---------------------------------------------------
+const textfollowers = document.getElementById("text1")
+const textCF = document.getElementById("text2")
+const followerPlus = document.getElementById("plusFollower")
+const followerMinus = document.getElementById("minusFollower")
+const CFplus = document.getElementById("plusCF")
+const CFminus = document.getElementById("minusCF")
 
-let square = new interation(document.getElementById("square"))
-square.move_to();
+let followers = 0
+
+let allFollowers = []
+let allCF = []
+
+followerPlus.addEventListener("click",()=>{
+    followers += 1
+    textfollowers.innerText = followers
+
+    let element = document.createElement("div")
+    element.classList.add("ball")
+
+    document.body.appendChild(element)
+
+    allFollowers.push(element)
+
+    let ball = new dyn(element)
+    ball.follow()
+})
+followerMinus.addEventListener("click",()=>{
+    if (followers > 0){
+        followers -= 1
+        textfollowers.innerText = Cfollowers
+        document.body.removeChild(allFollowers[0])
+        allFollowers.shift()
+    }
+})
+
+let Cfollowers = 0
+
+CFplus.addEventListener("click",()=>{
+    Cfollowers += 1
+    textCF.innerText = Cfollowers
+
+    let element = document.createElement("div")
+    element.classList.add("square")
+
+    document.body.appendChild(element)
+
+    allCF.push(element)
+    let square = new dyn(element)
+    square.follow_click()
+})
+CFminus.addEventListener("click",()=>{
+    if (Cfollowers > 0){
+        Cfollowers -= 1
+        textCF.innerText = Cfollowers
+        document.body.removeChild(allCF[0])
+        allCF.shift()
+    }
+})
+
+// ---------------------------------------------
+
+function starSpawn(){
+    let star = document.createElement("div")
+    star.classList.add("star")
+
+    star.style.top = `${Math.random()*innerHeight}px`
+    star.style.left = `${Math.random()*innerWidth}px`
+
+    let tam = Math.random()*20
+
+    star.style.height = `${tam}px`
+    star.style.width = `${tam}px`
+
+    document.body.appendChild(star)
+    setTimeout(()=>{
+        document.body.removeChild(star)
+    },2000)
+}
+
+setInterval(starSpawn, 300)

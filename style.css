@@ -1,21 +1,197 @@
-#circle{
-    position: absolute;
-
-    height: 50px;
-    width: 50px;
-
-    background-color: black;
-    border-radius: 50%;
+*{
+    margin: 0px;
+    padding: 0px;
 }
 
-#square{
+body{
+    background-color: black;
+    overflow: hidden;
+
+    z-index: 0;
+}
+
+header{
+    height: 70px;
+    width: 100%;
+
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.counter{
+    height: 50px;
+    width: 60px;
+
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 10px;
+
+    color: white;
+    font-size: 1.5em;
+}
+.counter>h2{
+    font-size: 1em;
+}
+
+.btns{
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.plus{
+    height: 20px;
+    width: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: chartreuse;
+    border: none;
+}
+.minus{
+    height: 20px;
+    width: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: red;
+    border: none;
+}
+
+*{
+    z-index: 3;
+}
+
+.sky_sun{
     position: absolute;
-    top: 50%;
-    left: 50%;
+    height: 100vh;
+    width: 100vw;
+    
+    display: flex;
+    justify-content: space-around;
+
+    z-index: 1;
+
+    animation: orbit 7s infinite linear;
+}
+
+.sun{
+    height: 80px;
+    width: 80px;
+
+    z-index: 2;
+
+    background-image: radial-gradient(red,orange,yellow);
+    border-radius: 50%;
+    box-shadow: 0 0 10px yellow,
+    0 0 50px rgba(255, 255, 0, 0.801),
+    0 0 100px rgba(255, 255, 0, 0.541),
+    0 0 150px rgba(255, 255, 0, 0.226);
+
+    animation: orbit 2s linear infinite;
+}
+
+.sky_moon{
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+
+    display: flex;
+    justify-content: space-around;
+
+    z-index: 1;
+
+    animation: orbit 4s infinite linear;
+}
+
+.moon{
+    height: 50px;
+    width: 50px;
+
+    z-index: 2;
+
+    background-image: radial-gradient(gray,black);
+    border-radius: 50%;
+    box-shadow: 0 0 10px white,
+    0 0 50px white,
+    0 0 100px white,
+    0 0 150px white;
+
+    animation: orbit 2s linear infinite;
+}
+
+@keyframes orbit {
+    0%{
+
+    }
+    100%{
+        transform: rotateZ(360deg);
+    }
+}
+
+.ball{
+    position: absolute;
+    left: 0%;
 
     height: 50px;
     width: 50px;
 
-    background-color: black;
+    background-color: rgb(0, 68, 255);
+
+    transition: box-shadow .5s, border-radius .5s;
+}
+
+.square{
+    position: absolute;
+    right: 0%;
+
+    height: 50px;
+    width: 50px;
+
+    background-color: rgb(0, 26, 255);
     transition: .5s;
+}
+
+.active{
+    background-color: #999;
+    border-radius: 50%;
+    box-shadow: 0 0 10px white,
+    0 0 50px white,
+    0 0 100px white,
+    0 0 150px white;
+}
+
+.star{
+    position: absolute;
+    background-color: white;
+
+    border-radius: 50%;
+
+    box-shadow: 0 0 10px white,
+    0 0 50px white,
+    0 0 100px white,
+    0 0 150px white;
+
+    transition: 1s;
+    animation: disapear 2s linear;
+}
+
+@keyframes disapear {
+    0%{
+
+    }
+    100%{
+        height: 0px;
+        width: 0px;
+
+        opacity: 0;
+    }
 }
