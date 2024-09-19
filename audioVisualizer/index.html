@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        html,body {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #canvas {
+            background-color: black;
+        }
+
+        #row{
+            position: absolute;
+            top: 0%;
+            left: 0%;
+
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #input {
+            color: white;
+        }
+
+        label {
+            color: white;
+        }
+        
+        #color {
+            width: 50px;
+            height: 50px;
+        }
+
+        #button {
+
+            width: 100px;
+            height: 40px;
+
+            background-color: white;
+        }
+    </style>
+
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <section id="row">
+        <input type="file" id="input">
+        <input type="color" id="color">
+        <label for="dyn">Dynamic</label>
+        <input type="checkbox" name="dyn" id="dyn">
+        <button  id="button">
+            audio
+        </button>
+    </section>
+
+    <script type="module" src="main.js"></script>
+</body>
+</html>
